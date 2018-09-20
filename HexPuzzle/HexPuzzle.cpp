@@ -47,30 +47,7 @@ HexPuzzle::HexPuzzle()
 
 HexPuzzle::CellValue HexPuzzle::Solve()
 {
-    CellValue solved = 0;
-    
-    bool empty = true;
-    for (std::size_t i = 0; empty && i < kNumCells; ++i)
-    {
-        if (fCell[i] != 0)
-            empty = false;
-    }
-    
-    if (!empty)
-    {
-        solved = SolveRemainingRows(0);
-    }
-    else
-    {
-        for (CellValue value = 1; !solved && value <= kNumCells; ++value)
-        {
-            SetCell(&fCell[0], value);
-            solved = SolveRemainingRows(0);
-            if (!solved)
-                SetCell(&fCell[0], 0);
-        }
-    }
-    
+    CellValue solved = SolveRemainingRows(0);
     return solved;
 }
 
@@ -205,9 +182,8 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
             }
         }
     }
-    else
+    else if (emptyCells.size() == 2)
     {
-        assert(emptyCells.size() == 2);
         CellValue valueA = kExpectedSum - runningSum;
         if (valueA > kNumCells)
             valueA = kNumCells;
@@ -232,6 +208,19 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
                         SetCell(emptyCells[1], 0);
                     }
                 }
+            }
+        }
+    }
+    else
+    {
+        for (CellValue value = kNumCells; !solved && value > 0; --value)
+        {
+            if (!fUsed[value])
+            {
+                SetCell(emptyCells[0], value);
+                solved = SolveRemainingRows(iRow);
+                if (!solved)
+                    SetCell(emptyCells[0], 0);
             }
         }
     }
