@@ -188,23 +188,23 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
         // of 3 and 4 are done, the only cell remaining is the one in
         // the middle, when emptyCells.size()==1.
         //
-        CellValue valueA = kExpectedSum - runningSum;
-        if (valueA > kNumCells)
-            valueA = kNumCells;
-        CellValue valueB = 0;
-        for (; !solved && valueA > (valueB = kExpectedSum - runningSum - valueA); --valueA)
+        CellValue a = kExpectedSum - runningSum;
+        if (a > kNumCells)
+            a = kNumCells;
+        CellValue b = 0;
+        for (; !solved && a > (b = kExpectedSum - runningSum - a); --a)
         {
-            if (valueA != valueB && !fUsed[valueA] && !fUsed[valueB])
+            if (a != b && !fUsed[a] && !fUsed[b])
             {
-                SetCell(emptyCells[0], valueA);
-                SetCell(emptyCells[1], valueB);
+                SetCell(emptyCells[0], a);
+                SetCell(emptyCells[1], b);
                 solved = SolveRemainingRows(nextRow);
                 if (!solved)
                 {
                     SetCell(emptyCells[0], 0);
                     SetCell(emptyCells[1], 0);
-                    SetCell(emptyCells[0], valueB);
-                    SetCell(emptyCells[1], valueA);
+                    SetCell(emptyCells[0], b);
+                    SetCell(emptyCells[1], a);
                     solved = SolveRemainingRows(nextRow);
                     if (!solved)
                     {
