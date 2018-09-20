@@ -140,7 +140,11 @@ HexPuzzle::CellValue HexPuzzle::SetCell(CellValue* cell, CellValue value)
 
 HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
 {
-    static CellValue kExpectedSum = 38; // (1 + 2 + ... 18 + 19) / 5
+    static const CellValue kExpectedSum = 38; // (1 + 2 + ... 18 + 19) / 5
+    
+    if (iRow >= fRows.size())
+        return kExpectedSum; // solved!
+    
     CellValue solved = 0;
     
     Row& row = fRows[iRow];
@@ -160,10 +164,7 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
     {
         if (runningSum == kExpectedSum)
         {
-            if (nextRow == fRows.size()) // Done!
-                solved = kExpectedSum;
-            else
-                solved = SolveRemainingRows(nextRow);
+            solved = SolveRemainingRows(nextRow);
         }
     }
     else if (emptyCells.size() == 1)
@@ -172,14 +173,9 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
         if (0 < value && value <= kNumCells && !fUsed[value])
         {
             SetCell(emptyCells[0], value);
-            if (nextRow == fRows.size()) // Done!
-                solved = kExpectedSum;
-            else
-            {
-                solved = SolveRemainingRows(nextRow);
-                if (!solved)
-                    SetCell(emptyCells[0], 0);
-            }
+            solved = SolveRemainingRows(nextRow);
+            if (!solved)
+                SetCell(emptyCells[0], 0);
         }
     }
     else if (emptyCells.size() == 2)
@@ -188,7 +184,7 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
         // of 3 and 4 are done, the only cell remaining is the one in
         // the middle, when emptyCells.size()==1.
         //
-        CellValue a = kExpectedSum - runningSum;
+        CellValue a = kExpectedSum - runningSum - 1; // -1 to leave room for b>0
         if (a > kNumCells)
             a = kNumCells;
         CellValue b = 0;
