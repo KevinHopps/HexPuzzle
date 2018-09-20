@@ -160,7 +160,7 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
     {
         if (runningSum == kExpectedSum)
         {
-            if (nextRow == fRows.size())
+            if (nextRow == fRows.size()) // Done!
                 solved = kExpectedSum;
             else
                 solved = SolveRemainingRows(nextRow);
@@ -169,10 +169,10 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
     else if (emptyCells.size() == 1)
     {
         CellValue value = kExpectedSum - runningSum;
-        if (0 <= value && value <= kNumCells && !fUsed[value])
+        if (0 < value && value <= kNumCells && !fUsed[value])
         {
             SetCell(emptyCells[0], value);
-            if (nextRow == fRows.size())
+            if (nextRow == fRows.size()) // Done!
                 solved = kExpectedSum;
             else
             {
@@ -184,6 +184,10 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
     }
     else if (emptyCells.size() == 2)
     {
+        // We know that nextRow < fRows.size() because after all rows
+        // of 3 and 4 are done, the only cell remaining is the one in
+        // the middle, when emptyCells.size()==1.
+        //
         CellValue valueA = kExpectedSum - runningSum;
         if (valueA > kNumCells)
             valueA = kNumCells;
