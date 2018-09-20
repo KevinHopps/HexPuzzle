@@ -6,10 +6,11 @@
 //  Copyright © 2018 Kevin Hopps. All rights reserved.
 //
 
-#include <iostream>
+#include "HexPuzzle.hpp"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+int main(int argc, const char * argv[])
+{
+    HexPuzzle hexPuzzle;
+    hexPuzzle.Solve();
     return 0;
 }

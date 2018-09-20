@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8151ACC021533FDA0082CAD1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8151ACBF21533FDA0082CAD1 /* main.cpp */; };
+		8151ACC82153401C0082CAD1 /* HexPuzzle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8151ACC62153401C0082CAD1 /* HexPuzzle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		8151ACBC21533FDA0082CAD1 /* HexPuzzle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HexPuzzle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8151ACBF21533FDA0082CAD1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8151ACC62153401C0082CAD1 /* HexPuzzle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HexPuzzle.cpp; sourceTree = "<group>"; };
+		8151ACC72153401C0082CAD1 /* HexPuzzle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HexPuzzle.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				8151ACBF21533FDA0082CAD1 /* main.cpp */,
+				8151ACC62153401C0082CAD1 /* HexPuzzle.cpp */,
+				8151ACC72153401C0082CAD1 /* HexPuzzle.hpp */,
 			);
 			path = HexPuzzle;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8151ACC021533FDA0082CAD1 /* main.cpp in Sources */,
+				8151ACC82153401C0082CAD1 /* HexPuzzle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
