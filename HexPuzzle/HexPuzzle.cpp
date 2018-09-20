@@ -47,7 +47,7 @@ HexPuzzle::HexPuzzle()
 
 HexPuzzle::CellValue HexPuzzle::Solve()
 {
-    int solved = 0;
+    CellValue solved = 0;
     
     bool empty = true;
     for (std::size_t i = 0; empty && i < kNumCells; ++i)
@@ -150,7 +150,7 @@ HexPuzzle::CellValue HexPuzzle::SetCell(CellValue* cell, CellValue value)
     if (value != 0)
         ++fNumTries;
     
-    int oldValue = *cell;
+    CellValue oldValue = *cell;
     *cell = value;
     
     fUsed[oldValue] = 0;
