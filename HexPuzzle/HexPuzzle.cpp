@@ -197,8 +197,8 @@ HexPuzzle::CellValue HexPuzzle::SolveRemainingRows(std::size_t iRow)
                 solved = SolveRemainingRows(nextRow);
                 if (!solved)
                 {
-                    SetCell(emptyCells[0], 0);
-                    SetCell(emptyCells[1], 0);
+                    SetCell(emptyCells[0], 0); // to get fUsed[] right
+                    SetCell(emptyCells[1], 0); // to get fUsed[] right
                     SetCell(emptyCells[0], b);
                     SetCell(emptyCells[1], a);
                     solved = SolveRemainingRows(nextRow);
